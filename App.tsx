@@ -1,19 +1,36 @@
 // Core imports.
 import React from 'react';
 import {
-  SafeAreaView,
-  Text,
-  useColorScheme,
+    SafeAreaView,
+    StyleSheet,
+    View,
+    useColorScheme,
 } from 'react-native';
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+// Local imports.
+import Dictionary from './pages/Dictionary';
 
-  return (
-    <SafeAreaView>
-      <Text>Hello</Text>
-    </SafeAreaView>
-  );
+function App(): React.JSX.Element {
+
+    const isDarkMode = useColorScheme() === 'dark';
+
+    return (
+        <SafeAreaView style = { styles.container }>
+            <View style = { styles.innerContainer }>
+                <Dictionary />
+            </View>
+        </SafeAreaView>
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#02304A',
+        height: '100%',
+    },
+    innerContainer: {
+        padding: 16,
+    }
+});
 
 export default App;
