@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 // Local imports.
-import Dictionary from './pages/Dictionary';
+import Dictionary from './src/pages/Dictionary';
 
 function App(): React.JSX.Element {
 
