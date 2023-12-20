@@ -11,9 +11,12 @@ class PokemonQuery {
      * 
      * @returns { Pokemon[] } - Pokemons to display.
      */
-    async getPokemons() {
-        const clientPokemons = await PokemonClient.getPokemons();
-        return this._transformPokemons(clientPokemons)
+    async getPokemons(next?: string) {
+        const clientPokemons = await PokemonClient.getPokemons(next);
+        return {
+            pokemons: this._transformPokemons(clientPokemons.pokemons),
+            next: clientPokemons.next,
+        }
     }
 
     private _transformPokemons(clientPokemons: APIPokemonType[]) {

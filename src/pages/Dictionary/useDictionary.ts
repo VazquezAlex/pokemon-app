@@ -11,10 +11,16 @@ import PokemonQuery from "../../queries/PokemonQuery";
 const useDictionary = () => {
 
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [nextPage, setNextPage] = useState<string>('');
 
+    /**
+     * Function to fetch pokemons for the api.
+     */
     const fetchPokemons = async () => {
-        const pokemonsRes = await PokemonQuery.getPokemons();
-        setPokemons(pokemonsRes);
+        const { pokemons: pokemonsRes, next } = await PokemonQuery.getPokemons(nextPage);
+
+        setPokemons(prev => !nextPage ? pokemonsRes : [...prev, ...pokemonsRes]);
+        setNextPage(next ? next : '');
     }
 
     useEffect(() => {
@@ -23,6 +29,7 @@ const useDictionary = () => {
 
     return {
         pokemons,
+        fetchPokemons,
     }
 }
 

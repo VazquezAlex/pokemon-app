@@ -15,7 +15,10 @@ import useDictionary from "./useDictionary";
  */
 const Dictionary = (): JSX.Element => {
 
-    const { pokemons } = useDictionary();
+    const { 
+        pokemons,
+        fetchPokemons,
+    } = useDictionary();
 
     const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -43,6 +46,7 @@ const Dictionary = (): JSX.Element => {
                         <Item pokemon = { item } onClick = { () => {} } />
                     )}
                     ItemSeparatorComponent = { () => <View style = {{ marginVertical: 4 }} /> }
+                    onEndReached = { () => fetchPokemons() }
                 />
             </View>
             

@@ -5,6 +5,7 @@ import { PokemonItemProps } from "./Item.types";
 /**
  * Item to display a Pokemon on the dictionary list.
  * 
+ * @param { PokemonItemProps } props - Properties for the component.
  * @returns { JSX.Element } - Pokémon Item.
  */
 const Item = (props: PokemonItemProps): JSX.Element => {
@@ -19,7 +20,7 @@ const Item = (props: PokemonItemProps): JSX.Element => {
             </View>
             <Image 
                 style = { pokemonItemStyles.image }
-                source = {{uri: pokemon.sprites.front }}
+                source = {{ uri: pokemon.sprites.front }}
                 height = { 80 }
                 width = { 130 }
             />

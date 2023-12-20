@@ -13,11 +13,11 @@ class PokemonClient {
      * 
      * @returns { APIPokemonType[] } - Pokemons from API.
      */
-    async getPokemons() {
+    async getPokemons(next?: string) {
 
         // Get the first pokemons.
         const resource = `${ this.endpoint }/pokemon?limit=10`;
-        const response = await fetch(this.nextEndpoint || resource);
+        const response = await fetch(next || resource);
         const pokemon = await response.json();
 
         // Set the next endpoint to fetch.
@@ -26,7 +26,10 @@ class PokemonClient {
         // Iterate to get all the info we need.
         const pokemons: any[] = await this._getPokemonsData(pokemon.results);
         
-        return pokemons as APIPokemonType[];
+        return { 
+            pokemons: pokemons as APIPokemonType[],
+            next: pokemon.next,
+        };
     }
 
     private async _getPokemonsData(resPokemons: any[]) {
