@@ -22,6 +22,9 @@ const SearchBar = (props: SearchBarProps): JSX.Element => {
     return (
         <View style = { searchBarStyles.container }>
             <TextInput 
+                placeholder = { placeholder }
+                placeholderTextColor = '#c3c3c3'
+                style = { searchBarStyles.input }
                 value = { value }
                 onChangeText = { onChange }
             />
