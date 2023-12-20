@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 
 // Local imports.
+import { Item } from "../../components/Pokemon";
 import SearchBar from "../../components/common/SearchBar";
 import Title from "../../components/common/Title";
 
@@ -20,7 +21,7 @@ const Dictionary = (): JSX.Element => {
     }, [searchTerm]);
 
     return (
-        <>
+        <View>
             <Title text = 'DICCIONARIO POKÉMON' />
             <View style = {{ marginVertical: 8 }} />
             <SearchBar 
@@ -28,7 +29,12 @@ const Dictionary = (): JSX.Element => {
                 value = { searchTerm }
                 onChange = { (s) => setSearchTerm(s) }
             />
-        </>
+            {/* TODO: Add Separator Line  */}
+
+            <View style = {{ marginVertical: 8 }} />
+            <Item />
+        
+        </View>
     );
 }
 
