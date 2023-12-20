@@ -1,11 +1,12 @@
 // Core imports.
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
 
 // Local imports.
 import { Item } from "../../components/Pokemon";
 import SearchBar from "../../components/common/SearchBar";
 import Title from "../../components/common/Title";
+import useDictionary from "./useDictionary";
 
 /**
  * Dictionary Page for the app.
@@ -14,6 +15,8 @@ import Title from "../../components/common/Title";
  */
 const Dictionary = (): JSX.Element => {
 
+    const { pokemons } = useDictionary();
+
     const [searchTerm, setSearchTerm] = useState<string>('');
 
     useEffect(() => {
@@ -21,10 +24,10 @@ const Dictionary = (): JSX.Element => {
     }, [searchTerm]);
 
     return (
-        <View>
+        <SafeAreaView>
             <Title text = 'DICCIONARIO POKÉMON' />
             <View style = {{ marginVertical: 8 }} />
-            <SearchBar 
+            <SearchBar
                 placeholder = "Buscar pokémon"
                 value = { searchTerm }
                 onChange = { (s) => setSearchTerm(s) }
@@ -32,9 +35,19 @@ const Dictionary = (): JSX.Element => {
             {/* TODO: Add Separator Line  */}
 
             <View style = {{ marginVertical: 8 }} />
-            <Item />
-        
-        </View>
+
+            <View style = {{ height: '78%' }}>
+                <FlatList
+                    data = { pokemons }
+                    keyExtractor = { pokemons.id }
+                    renderItem = { () => (
+                        <Item />
+                    )}
+                    ItemSeparatorComponent = { () => <View style = {{ marginVertical: 4 }} /> }
+                />
+            </View>
+            
+        </SafeAreaView>
     );
 }
 
