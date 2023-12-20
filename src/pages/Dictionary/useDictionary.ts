@@ -1,16 +1,19 @@
 // Core imports.
 import { useEffect, useState } from "react";
-import PokemonClient from "../../clients/PokemonClient";
+
+// Local imports.
+import { Pokemon } from "../../types/pokemon";
+import PokemonQuery from "../../queries/PokemonQuery";
 
 /**
  * Hook to handle state & methods for the dictionary.
  */
 const useDictionary = () => {
 
-    const [pokemons, setPokemons] = useState<any>([]);
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
     const fetchPokemons = async () => {
-        const pokemonsRes = await PokemonClient.getPokemons();
+        const pokemonsRes = await PokemonQuery.getPokemons();
         setPokemons(pokemonsRes);
     }
 

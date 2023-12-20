@@ -39,9 +39,8 @@ const Dictionary = (): JSX.Element => {
             <View style = {{ height: '78%' }}>
                 <FlatList
                     data = { pokemons }
-                    keyExtractor = { pokemons.id }
-                    renderItem = { () => (
-                        <Item />
+                    renderItem = { ({ item }) => (
+                        <Item pokemon = { item } onClick = { () => {} } />
                     )}
                     ItemSeparatorComponent = { () => <View style = {{ marginVertical: 4 }} /> }
                 />
