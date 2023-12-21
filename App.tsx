@@ -4,22 +4,45 @@ import {
     SafeAreaView,
     StyleSheet,
     View,
-    useColorScheme,
 } from 'react-native';
 
 // Local imports.
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import Dictionary from './src/pages/Dictionary';
 
 function App(): React.JSX.Element {
 
-    const isDarkMode = useColorScheme() === 'dark';
+    // Creation of app-level Stack Navigator.
+    const Stack = createNativeStackNavigator();
 
-    return (
+    const PageTemplate = ({ children }: { children: JSX.Element }): JSX.Element => (
         <SafeAreaView style = { styles.container }>
             <View style = { styles.innerContainer }>
-                <Dictionary />
+                { children }
             </View>
         </SafeAreaView>
+    )
+
+    const DictionaryPage = (): JSX.Element => (
+        <PageTemplate>
+            <Dictionary />
+        </PageTemplate>
+    );
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                screenOptions = {{
+                    headerShown: false,
+                }}
+            >
+                <Stack.Screen 
+                    name = "Home" 
+                    component = { DictionaryPage } 
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
 
