@@ -1,80 +1,17 @@
 // Core imports.
 import React from 'react';
-import {
-    SafeAreaView,
-    StyleSheet,
-    View,
-} from 'react-native';
-
-export type RootStackParamList = {
-    Home: undefined,
-    Detail: { pokemon: Pokemon },
-}
-
-declare global {
-    namespace ReactNavigation {
-        interface RootParamList extends RootStackParamList { }
-    }
-}
 
 // Local imports.
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import Dictionary from './src/pages/Dictionary';
-import Detail from './src/pages/Detail';
-import { Pokemon } from './src/types/pokemon';
+import RootStack from './src/routes/RootStack';
 
 function App(): React.JSX.Element {
 
-
-    // Creation of app-level Stack Navigator.
-    const Stack = createNativeStackNavigator<RootStackParamList>();
-
-    const PageTemplate = ({ children }: { children: JSX.Element }): JSX.Element => (
-        <SafeAreaView style = { styles.container }>
-            <View style = { styles.innerContainer }>
-                { children }
-            </View>
-        </SafeAreaView>
-    )
-
-    const DictionaryPage = (): JSX.Element => (
-        <PageTemplate>
-            <Dictionary />
-        </PageTemplate>
-    );
-
-    const DetailPage = (): JSX.Element => (
-        <PageTemplate>
-            <Detail />
-        </PageTemplate>
-    )
-
     return (
         <NavigationContainer>
-            <Stack.Navigator
-                screenOptions = {{
-                    headerShown: false,
-                }}
-            >
-                <Stack.Screen name = "Home" component = { DictionaryPage } />
-                <Stack.Screen 
-                    name = "Detail" 
-                    component = { DetailPage } 
-                />
-            </Stack.Navigator>
+            <RootStack />
         </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#02304A',
-        height: '100%',
-    },
-    innerContainer: {
-        padding: 16,
-    }
-});
 
 export default App;
