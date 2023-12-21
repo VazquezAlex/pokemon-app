@@ -6,15 +6,29 @@ import {
     View,
 } from 'react-native';
 
+export type RootStackParamList = {
+    Home: undefined,
+    Detail: { pokemon: Pokemon },
+}
+
+declare global {
+    namespace ReactNavigation {
+        interface RootParamList extends RootStackParamList { }
+    }
+}
+
 // Local imports.
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Dictionary from './src/pages/Dictionary';
+import Detail from './src/pages/Detail';
+import { Pokemon } from './src/types/pokemon';
 
 function App(): React.JSX.Element {
 
+
     // Creation of app-level Stack Navigator.
-    const Stack = createNativeStackNavigator();
+    const Stack = createNativeStackNavigator<RootStackParamList>();
 
     const PageTemplate = ({ children }: { children: JSX.Element }): JSX.Element => (
         <SafeAreaView style = { styles.container }>
@@ -30,6 +44,12 @@ function App(): React.JSX.Element {
         </PageTemplate>
     );
 
+    const DetailPage = (): JSX.Element => (
+        <PageTemplate>
+            <Detail />
+        </PageTemplate>
+    )
+
     return (
         <NavigationContainer>
             <Stack.Navigator
@@ -37,9 +57,10 @@ function App(): React.JSX.Element {
                     headerShown: false,
                 }}
             >
+                <Stack.Screen name = "Home" component = { DictionaryPage } />
                 <Stack.Screen 
-                    name = "Home" 
-                    component = { DictionaryPage } 
+                    name = "Detail" 
+                    component = { DetailPage } 
                 />
             </Stack.Navigator>
         </NavigationContainer>

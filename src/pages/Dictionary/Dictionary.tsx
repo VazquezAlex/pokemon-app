@@ -1,6 +1,7 @@
 // Core imports.
-import { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
+import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 // Local imports.
 import { Item } from "../../components/Pokemon";
@@ -14,6 +15,8 @@ import useDictionary from "./useDictionary";
  * @returns { JSX.Element } - Dictionary Page.
  */
 const Dictionary = (): JSX.Element => {
+
+    const { navigate } = useNavigation();
 
     const { 
         pokemons,
@@ -35,6 +38,7 @@ const Dictionary = (): JSX.Element => {
                 value = { searchTerm }
                 onChange = { (s) => setSearchTerm(s) }
             />
+
             {/* TODO: Add Separator Line  */}
 
             <View style = {{ marginVertical: 8 }} />
@@ -43,7 +47,10 @@ const Dictionary = (): JSX.Element => {
                 <FlatList
                     data = { pokemons }
                     renderItem = { ({ item }) => (
-                        <Item pokemon = { item } onClick = { () => {} } />
+                        <Item 
+                            pokemon = { item } 
+                            onPress = { () => navigate('Detail', { pokemon: item }) } 
+                        />
                     )}
                     ItemSeparatorComponent = { () => <View style = {{ marginVertical: 4 }} /> }
                     onEndReached = { () => fetchPokemons() }

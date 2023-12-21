@@ -1,4 +1,4 @@
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { pokemonItemStyles } from "./Item.styles";
 import { PokemonItemProps } from "./Item.types";
 
@@ -10,10 +10,13 @@ import { PokemonItemProps } from "./Item.types";
  */
 const Item = (props: PokemonItemProps): JSX.Element => {
 
-    const { pokemon, onClick } = props;
+    const { pokemon, onPress } = props;
 
     return (
-        <View style = { pokemonItemStyles.container }>
+        <TouchableOpacity 
+            style = { pokemonItemStyles.container }
+            onPress = { onPress }
+        >
             <View style = { pokemonItemStyles.infoContainer }>
                 <Text style = { pokemonItemStyles.name }>{ pokemon.name }</Text>
                 <Text style = { pokemonItemStyles.type }>{ pokemon.type.name }</Text>
@@ -24,7 +27,7 @@ const Item = (props: PokemonItemProps): JSX.Element => {
                 height = { 80 }
                 width = { 130 }
             />
-        </View>
+        </TouchableOpacity>
     );
 }
 
