@@ -1,3 +1,9 @@
+
+export interface APIPokemonSummary {
+    name: string;
+    url: string;
+}
+
 export interface APIPokemonType {
     abilities?: AbilitiesEntity[] | null;
     base_experience: number;

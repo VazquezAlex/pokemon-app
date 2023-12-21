@@ -1,4 +1,5 @@
-import { APIPokemonType } from "./PokemonClient.types";
+// Local imports.
+import { APIPokemonSummary, APIPokemonType } from "./PokemonClient.types";
 
 /**
  * Class to handle the calls on the Pokemon components.
@@ -6,8 +7,7 @@ import { APIPokemonType } from "./PokemonClient.types";
 class PokemonClient {
 
     private endpoint = 'https://pokeapi.co/api/v2';
-    private nextEndpoint: string = '';
-
+    
     /**
      * Get pokemons from API.
      * 
@@ -20,11 +20,8 @@ class PokemonClient {
         const response = await fetch(next || resource);
         const pokemon = await response.json();
 
-        // Set the next endpoint to fetch.
-        this.nextEndpoint = pokemon.next;
-
         // Iterate to get all the info we need.
-        const pokemons: any[] = await this._getPokemonsData(pokemon.results);
+        const pokemons: APIPokemonType[] = await this._getPokemonsData(pokemon.results);
         
         return { 
             pokemons: pokemons as APIPokemonType[],
@@ -32,7 +29,13 @@ class PokemonClient {
         };
     }
 
-    private async _getPokemonsData(resPokemons: any[]) {
+    /**
+     * Filters through the received pokemons, and gets the full data for each.
+     * 
+     * @param { any } resPokemons - Pokemons from the response. 
+     * @returns 
+     */
+    private async _getPokemonsData(resPokemons: APIPokemonSummary[]) {
         const pokemonsData: any[] = [];
 
         for (let i = 0; i < resPokemons.length; i++) {
