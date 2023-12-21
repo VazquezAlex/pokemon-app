@@ -1,8 +1,8 @@
 // Core imports.
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 // Third-party imports.
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
 // Local imports.
 import { Pokemon } from "../../types/pokemon";
@@ -17,6 +17,8 @@ const IMAGE_HEIGHT = 180;
  * @returns { JSX.Element } - Detail Page.
  */
 const Detail = (): JSX.Element => {
+
+    const { goBack } = useNavigation();
 
     // Get params from route.
     const { params } = useRoute<RouteProp<RootStackParamList>>();
@@ -53,6 +55,10 @@ const Detail = (): JSX.Element => {
                     { renderStats }
                 </View>
             </View>
+            <Button 
+                title = 'Regresar'
+                onPress = { () => goBack() }
+            />
         </View>
     );
 }
@@ -73,6 +79,7 @@ const styles = StyleSheet.create({
     infoContainer: {
         backgroundColor: '#ffffff50',
         borderRadius: 8,
+        marginBottom: 20,
         marginTop: ((IMAGE_HEIGHT / 2) - 10) * -1,
         padding: 24,
         paddingTop: IMAGE_HEIGHT / 2,
