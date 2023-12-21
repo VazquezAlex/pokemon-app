@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     infoContainer: {
         backgroundColor: '#ffffff50',
         borderRadius: 8,
-        marginTop: ((IMAGE_HEIGHT / 2) * -1) - 15,
+        marginTop: ((IMAGE_HEIGHT / 2) - 10) * -1,
         padding: 24,
         paddingTop: IMAGE_HEIGHT / 2,
         zIndex: 1,

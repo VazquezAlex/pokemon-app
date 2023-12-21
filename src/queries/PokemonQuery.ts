@@ -30,7 +30,8 @@ class PokemonQuery {
                 order: p.order,
                 sprites: {
                     back: p.sprites.back_shiny,
-                    front: p.sprites.front_shiny,
+                    front: p.sprites.other.home.front_default || p.sprites.front_shiny,
+                    // front: p.sprites.front_shiny,
                 },
                 stats: p.stats,
                 weight: p.weight,
